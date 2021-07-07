@@ -14,7 +14,7 @@ const FancyOrnamental = (props) => {
     &:after {
       position: absolute;
       content: '';
-      width: 50%;
+      width: ${props => `calc(50% - ${props.gapSize/2}px)` || '50%'};
       height: 100%;
       top: 0;
       border-style: solid;
@@ -25,7 +25,6 @@ const FancyOrnamental = (props) => {
       border-width: ${props => `${props.borderSize}px 0 ${props.borderSize}px ${props.borderSize}px` || '1px 0 1px 1px'} ;
       border-top-left-radius: ${props => props.roundedSize ? `${props.roundedSize}px` : '3px'};
       border-bottom-left-radius: ${props => props.roundedSize ? `${props.roundedSize}px` : '3px'};
-      margin-right: ${props => props.gapSize + 'px' || 0};
     }
 
     &:after {
