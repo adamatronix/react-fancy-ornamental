@@ -1,9 +1,7 @@
 // components/index.js
 
-/*
-import Button from './Button';
+import FancyOrnamental from './FancyOrnamental/FancyOrnamental';
 
 export { 
-    Button
+  FancyOrnamental 
 };
-*/
