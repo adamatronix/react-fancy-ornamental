@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FancyOrnamental = (props) => {
-  const { children } = props;
+  const { children, topOrnament, bottomOrnament, ornamentHeight, gapSize } = props;
 
   const Container = styled.div`
     display: flex;
@@ -24,6 +24,7 @@ const FancyOrnamental = (props) => {
       border-width: 1px 0 1px 1px;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
+      margin-right: ${props => props.gapSize + 'px' || 0};
     }
 
     &:after {
@@ -41,13 +42,39 @@ const FancyOrnamental = (props) => {
     top: 0;
   `
 
+  const OrnamentContainer = styled.div`
+    position: absolute;
+    height: ${props => props.height + 'px' || '50px'};
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      height: 100%;
+    }
+  `
+
+  const OrnamentTopContainer = styled(OrnamentContainer)`
+    top: ${props => props.height ? ((props.height / 2) * -1) + 'px' : '-25px'};
+  `
+
+  const OrnamentBottomContainer = styled(OrnamentContainer)`
+    bottom: ${props => props.height ? ((props.height / 2) * -1) + 'px' : '-25px'};
+  `
+
   
 
   return (
-    <Container>
+    <Container gapSize={gapSize || null}>
+      { topOrnament ? <OrnamentTopContainer height={ornamentHeight || null}>
+        { topOrnament || null }
+      </OrnamentTopContainer> : null }
       <InnerContainer>
         { children }
       </InnerContainer>
+      { bottomOrnament ? <OrnamentBottomContainer height={ornamentHeight || null}>
+        { bottomOrnament || null }
+      </OrnamentBottomContainer> : null }
     </Container>
   )
 }
