@@ -2,16 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FancyOrnamental = (props) => {
-  const { children, topOrnament, bottomOrnament, ornamentHeight, gapSize } = props;
+  const { children, topOrnament, bottomOrnament, ornamentHeight, gapSize, borderSize, roundedSize, autoHeight } = props;
 
   const Container = styled.div`
     display: flex;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: ${props => props.autoHeight ? 'auto' : '100%' };
 
     &:before,
     &:after {
+      position: absolute;
       content: '';
       width: 50%;
       height: 100%;
@@ -21,16 +22,17 @@ const FancyOrnamental = (props) => {
     }
 
     &:before {
-      border-width: 1px 0 1px 1px;
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px;
+      border-width: ${props => `${props.borderSize}px 0 ${props.borderSize}px ${props.borderSize}px` || '1px 0 1px 1px'} ;
+      border-top-left-radius: ${props => props.roundedSize ? `${props.roundedSize}px` : '3px'};
+      border-bottom-left-radius: ${props => props.roundedSize ? `${props.roundedSize}px` : '3px'};
       margin-right: ${props => props.gapSize + 'px' || 0};
     }
 
     &:after {
-      border-width: 1px 1px 1px 0px;
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
+      right: 0;
+      border-width: ${props => `${props.borderSize}px ${props.borderSize}px ${props.borderSize}px 0` || '1px 1px 1px 0'};
+      border-top-right-radius: ${props => props.roundedSize ? `${props.roundedSize}px` : '3px'};
+      border-bottom-right-radius: ${props => props.roundedSize ? `${props.roundedSize}px` : '3px'};
     }
   `
 
@@ -65,7 +67,7 @@ const FancyOrnamental = (props) => {
   
 
   return (
-    <Container gapSize={gapSize || null}>
+    <Container gapSize={gapSize || null} borderSize={borderSize || null} roundedSize={roundedSize || null} autoHeight={autoHeight}>
       { topOrnament ? <OrnamentTopContainer height={ornamentHeight || null}>
         { topOrnament || null }
       </OrnamentTopContainer> : null }
