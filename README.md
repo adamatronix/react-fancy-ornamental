@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# react-fancy-ornamental
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Add some fanciness to your site by adding a decorative container to your layout.
 
-## Available Scripts
+## Install
 
-In the project directory, you can run:
+```console
+$ npm install @adamatronix/react-fancy-ornamental --save
+```
 
-### `npm start`
+## Example Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Basic
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Implementation using one hundred percent of the height.
 
-### `npm test`
+```jsx
+import React from 'react'
+import { FancyOrnamental } from '@adamatronix/react-fancy-ornamental'
+import { ReactComponent as Ornament } from './assets/ornament-1.svg';
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+const Example = () => {
+  return <div style={{height: '100vh', width: '100%', boxSizing: 'border-box', padding: '100px'}}>
+      <FancyOrnamental 
+        topOrnament={<Ornament/>} 
+        bottomOrnament={<Ornament/>} 
+        ornamentHeight={48} 
+      ></FancyOrnamental>
+    </div>
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### With autoHeight
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Allow the container to take the height of the content.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```jsx
+import React from 'react'
+import { FancyOrnamental } from '@adamatronix/react-fancy-ornamental'
+import { ReactComponent as Ornament } from './assets/ornament-1.svg';
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const Example = () => {
+  return 
+      <FancyOrnamental 
+        topOrnament={<Ornament/>} 
+        bottomOrnament={<Ornament/>} 
+        ornamentHeight={48} 
+        autoHeight
+      >Cras est metus, iaculis a dictum eget, suscipit vitae quam. Mauris sollicitudin lectus nec mollis tristique. Fusce sagittis, nulla et gravida elementum, orci nisl pellentesque lacus, eget tempor nibh erat nec elit. Aenean ante massa, varius vitae ullamcorper vel, iaculis a urna. Vestibulum ultricies semper nisl quis malesuada. Fusce ullamcorper nunc non tempor consectetur. Donec at turpis ac dui interdum maximus in eget dui. Vestibulum viverra velit quis efficitur dictum. Ut molestie nibh vel lectus sollicitudin bibendum. Aenean suscipit eget purus sed fermentum.</FancyOrnamental>
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Props
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### topOrnament
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Type: Node Default: undefined
 
-## Learn More
+The asset which will appear at the top of the container.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**NOTICE**
+Only one child is allowed to be passed.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### bottomOrnament
 
-### Code Splitting
+Type: Node Default: undefined
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The asset which will appear at the bottom of the container.
 
-### Analyzing the Bundle Size
+**NOTICE**
+Only one child is allowed to be passed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### ornamentHeight
 
-### Making a Progressive Web App
+Type: Number Default: undefined
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Pass the height of the ornaments
 
-### Advanced Configuration
+### gapSize
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Type: Number Default: undefined
 
-### Deployment
+Pass size of the gap which will appear inbetween the border where the ornament lies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### borderSize
 
-### `npm run build` fails to minify
+Type: Number Default: undefined
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Pass size of the border.
+
+### roundedSize
+
+Type: Number Default: undefined
+
+Pass radius size of the border.
+
+### autoHeight
+
+Type: Boolean Default: undefined
+
+When set, it allows the container to take the children content height. Otherwise it will be one hundred percent of its parent.
